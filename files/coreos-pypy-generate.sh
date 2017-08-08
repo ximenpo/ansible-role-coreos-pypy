@@ -55,6 +55,10 @@ if  [ ! -e "${INSTALL_GUARD}" ]; then
     fi
 fi
 
+if  [ -d "${INSTALL_TMP}" ]; then
+    rm  -rf "${INSTALL_TMP}"
+fi
+
 if  [ ! -e "${INSTALL_GUARD}" ]; then
 	echo    "Error: pypy install failed" >&2
     exit    2
