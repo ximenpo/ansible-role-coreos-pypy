@@ -1,0 +1,14 @@
+---
+dependencies: []
+
+galaxy_info:
+  author: ximenpo@jiandan.ren
+  description: "generate pypy env for CoreOS"
+  license: "MIT"
+  min_ansible_version: 2.0
+  galaxy_tags:
+    - system
+  platforms:
+    - name: CoreOS
+      versions:
+        - all

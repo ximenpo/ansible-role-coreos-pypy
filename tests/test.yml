@@ -1,0 +1,11 @@
+---
+
+- name: test
+  hosts: localhost
+  gather_facts: false
+  roles:
+    - role: coreos-pypy
+      #python_version: ~
+      #pypy_version: '5.8-1'
+      #wget_url: ~
+      #wget_env: SOCKS_SERVER=172.17.8.1:1080
