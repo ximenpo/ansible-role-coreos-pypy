@@ -3,9 +3,9 @@
 # 下载url使用 https://bitbucket.org/squeaky/portable-pypy/downloads/ 
 #   必须是 tar.bz2 格式
 #   pypy${python_version}-${pypy_version}-linux_x86_64-portable.tar.bz2
-pypy_version:   '5.8-1'
-python_version: ''
+pypy_version:         '5.8-1'
+pypy_python_version:  ''
 
 # 自定义下载URL，优先级比默认的高
-wget_url:   ~
-wget_env:   ~
+pypy_wget_url:        ~
+pypy_wget_env:        ~

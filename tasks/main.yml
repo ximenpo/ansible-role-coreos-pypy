@@ -4,6 +4,6 @@
   script: >
       coreos-pypy-generate.sh
         {{ pypy_version or ""|quote }}
-        {{ python_version or ""|quote }}
-        {{ wget_url or ""|quote }}
-        {{ wget_env or ""|quote }}
+        {{ pypy_python_version or ""|quote }}
+        {{ pypy_wget_url or ""|quote }}
+        {{ pypy_wget_env or ""|quote }}
