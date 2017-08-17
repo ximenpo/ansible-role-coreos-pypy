@@ -9,3 +9,5 @@ pypy_python_version:  ''
 # 自定义下载URL，优先级比默认的高
 pypy_wget_url:        ~
 pypy_wget_env:        ~
+
+pypy_install_pip:     no

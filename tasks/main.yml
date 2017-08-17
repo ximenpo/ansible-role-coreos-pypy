@@ -1,9 +1,53 @@
 ---
 
-- name: install pypy env
+
+- name: check pypy status
+  raw:  stat /opt/bin/pypy
+  register: pypy_is_installed
+  ignore_errors: True
+
+- name: install pypy
+  when: pypy_is_installed | failed
   script: >
       coreos-pypy-generate.sh
         {{ pypy_version or ""|quote }}
         {{ pypy_python_version or ""|quote }}
         {{ pypy_wget_url or ""|quote }}
         {{ pypy_wget_env or ""|quote }}
+
+- name: check pip status
+  when:
+    - (pypy_install_pip != None)
+    - (pypy_install_pip)
+  raw:  stat /opt/bin/pip
+  register: pypy_pip_is_installed
+  ignore_errors: True
+
+- name: install pip
+  vars:
+    ansible_python_interpreter: /opt/bin/pypy
+  when:
+    - (pypy_install_pip != None)
+    - (pypy_install_pip)
+    - (pypy_pip_is_installed|failed)
+  block:
+    - name: get tempfile
+      tempfile:
+        state:  file
+        suffix: pip
+      register: tmp_file
+    - name: copy get-pip.py
+      copy:
+        src:    get-pip.py
+        dest:   '{{tmp_file.path}}'
+    - name: install pip
+      raw:    |
+          sudo /opt/bin/pypy {{tmp_file.path|quote}} && {
+            export  PYPY_PATH=`sudo ls -l /opt/bin/pypy| cut -d ' ' -f 11`
+            export  PYPY_DIR=`dirname ${PYPY_PATH}`
+            sudo  ln  -s  ${PYPY_DIR}/pip  /opt/bin/pip
+          }
+    - name: rm tempfile
+      file:
+        path:   '{{tmp_file.path}}'
+        state:  absent
