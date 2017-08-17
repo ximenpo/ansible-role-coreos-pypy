@@ -1,6 +1,6 @@
 ---
 
-- name: generate pypy env
+- name: install pypy env
   script: >
       coreos-pypy-generate.sh
         {{ pypy_version or ""|quote }}
