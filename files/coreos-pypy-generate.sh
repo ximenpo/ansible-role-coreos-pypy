@@ -75,4 +75,6 @@ for f in pypy virtualenv-pypy ; do
     ln  -fs  "${INSTALL_DIR}/bin/${f}"   "${BIN_DIR}/${f}"
 done
 
+ln  -fs  "${INSTALL_DIR}/bin/pypy"      "${BIN_DIR}/python"
+
 exit    0
