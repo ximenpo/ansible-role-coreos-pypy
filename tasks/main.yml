@@ -43,7 +43,7 @@
     - name: install pip
       raw:    |
           sudo /opt/bin/pypy {{tmp_file.path|quote}} && {
-            export  PYPY_PATH=`sudo ls -l /opt/bin/pypy| cut -d ' ' -f 11`
+            export  PYPY_PATH=`readlink /opt/bin/pypy`
             export  PYPY_DIR=`dirname ${PYPY_PATH}`
             sudo  ln  -s  ${PYPY_DIR}/pip  /opt/bin/pip
           }
